@@ -8,10 +8,11 @@
 #define NUM_TUNEL 4 // Cantidad de túneles
 #define BUFFER_SIZE 256 // Tamaño del buffer
 
-int entradaAC[2];
-int entradaCB[2];
-int entradaDE[2];
-int entradaED[2];
+int entradaA[2];
+int entradaB[2];
+int entradaC[2];
+int entradaD[2];
+int entradaE[2];
 
 
 // Estructura para el monitor del túnel
@@ -24,8 +25,8 @@ typedef struct{
 // Estructura para los datos de un automóvil
 typedef struct{
     int id;
-    int prioridad; 
-}Automovil;
+    int prioridad; // 0 = civil -- 1 = Emergencia
+}Vehiculo;
 
 // Inicializando el monitor del tunel
 void initMonitorTunel(MonitorTunel *monitor){
@@ -33,6 +34,14 @@ void initMonitorTunel(MonitorTunel *monitor){
     monitor->capacidad=MAX_TUNEL_CAPACIDAD;
     monitor->cant_autos=0;
     pthread_mutex_init(&monitor->mutex, NULL);
+
+}
+
+// Inicializando el vehiculo
+void initVehiculo(Vehiculo *vehiculo, int identificador, int prio){
+
+    vehiculo->id=identificador;
+    vehiculo->prioridad=prio;
 
 }
 
@@ -51,33 +60,21 @@ void salirMonitor(MonitorTunel *monitor){
 }
 
 // Función para que el automóvil envíe un mensaje al monitor para entrar al túnel
-void cruzaVehiculoAC(MonitorTunel *monitor, Automovil *Auto) {
+void ingresaVehiculoAC(MonitorTunel *monitor, Vehiculo *vehiculo) {
+    
+    //Mensaje a envia desde Vehiculo a monitor entrada A
+    char msj[] = "Solicitud ingreso de vehiculo a Entrada A";
+    printf("Vehiculo %d: Enviando mensaje a Entrada A", vehiculo->id);
+
+
     accesoMonitor(monitor);
-    char msj[] = "Mensaje desde Entrada A";
 }
 
 // Función para que el automóvil notifique al monitor cuando sale del túnel
-void SaleVehiculo(MonitorTunel *monitor, Automovil *Auto) {
+void saleVehiculo(MonitorTunel *monitor, Vehiculo *vehiculo) {
 
 }
 
-// Creacion de funciones de los hilos que simulan cada entrada
-
-// Entrada A
-void *hiloEntradaA(MonitorTunel *monitor, Automovil *Auto){
-
-}
-
-
-
-
-
-
-
-// Función para manejar la señal de emergencia
-void emergencia(int adelanto) {
-
-}
 
 
 
