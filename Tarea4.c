@@ -260,6 +260,8 @@ int main() {
     }
     // Inicializacion de Mutex
     pthread_mutex_init(&respuestaA, NULL);
+    pthread_mutex_init(&respuestaC, NULL);
+    pthread_mutex_init(&respuestaD, NULL);
 
     // Declaracion de hilos
     pthread_t hiloA, hiloC, hiloD;
